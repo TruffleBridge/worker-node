@@ -7,6 +7,7 @@ import { logger } from './utils/logger.js';
 
 const app: Application = express();
 
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
