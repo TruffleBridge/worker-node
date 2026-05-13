@@ -2,7 +2,13 @@ import UserRepository from '../repository/UserRepository.js';
 import bcrypt from 'bcrypt';
 
 class UserService {
-  async register(firstName: string, lastName: string, email: string, password: string, phoneNumber: string) {
+  async register({ firstName, lastName, email, password, phoneNumber }: {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber: string
+  }) {
     try {
       // Check if user already exists
       const existingUser = await UserRepository.findByEmail(email);
@@ -26,16 +32,13 @@ class UserService {
       const userData = newUser.toJSON();
       delete userData.password;
 
-      return {
-        user: userData,
-        message: 'User registered successfully',
-      };
-    } catch (error) {
-      throw new Error(`Registration failed: ${error}`);
+      return userData;
+    } catch (error: any) {
+      throw new Error(error.message || 'Registration failed');
     }
   }
 
-  async login(email: string, password: string) {
+  async login({ email, password }: { email: string, password: string }) {
     try {
       const user = await UserRepository.findByEmail(email);
       if (!user) {
@@ -52,12 +55,9 @@ class UserService {
       const userData = user.toJSON();
       delete userData.password;
 
-      return {
-        user: userData,
-        // Add token generation here if needed (JWT)
-      };
-    } catch (error) {
-      throw new Error(`Login failed: ${error}`);
+      return userData;
+    } catch (error: any) {
+      throw new Error(error.message || 'Login failed');
     }
   }
 }

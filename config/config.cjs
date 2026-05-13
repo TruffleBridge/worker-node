@@ -1,0 +1,21 @@
+import dotenv from 'dotenv';
+import { log } from 'node:console';
+
+dotenv.config();
+console.log('Database configuration loaded:');
+
+const config = {
+
+  username: process.env.DB_USERNAME || 'root',
+  password: process.env.DB_PASSWORD || 'database_dev',
+  database: process.env.DB_NAME || 'database_dev',
+  host: process.env.DB_HOST || '127.0.0.1',
+  port: process.env.DB_PORT || 3306,
+  dialect: 'mysql',
+  dialectOptions: {
+    bigNumberStrings: true,
+  },
+
+};
+
+export default config;
