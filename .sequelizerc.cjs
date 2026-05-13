@@ -1,6 +1,6 @@
-// .sequelizerc
-
+// .sequelizerc.cjs
 const path = require('path');
+
 module.exports = {
   config: path.resolve('config', 'config.cjs'),
   'models-path': path.resolve('models'),

@@ -1,11 +1,8 @@
-import dotenv from 'dotenv';
-import { log } from 'node:console';
+const dotenv = require('dotenv');
 
 dotenv.config();
-console.log('Database configuration loaded:');
 
-const config = {
-
+module.exports = {
   username: process.env.DB_USERNAME || 'root',
   password: process.env.DB_PASSWORD || 'database_dev',
   database: process.env.DB_NAME || 'database_dev',
@@ -15,7 +12,4 @@ const config = {
   dialectOptions: {
     bigNumberStrings: true,
   },
-
 };
-
-export default config;
