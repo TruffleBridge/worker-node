@@ -8,8 +8,11 @@ class User extends Model {
   public email!: string;
   public phone!: string;
   public password!: string;
-  public createdAt!: Date;
-  public updatedAt!: Date;
+  public activeStatus!: boolean;
+  public deleteStatus!: boolean;
+  public userTypeId!: number;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 User.init(
@@ -43,10 +46,24 @@ User.init(
       type: DataTypes.STRING(255),
       allowNull: false,
     },
+    activeStatus: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
+    deleteStatus: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    userTypeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,
-    tableName: 'users',
+    tableName: 'User',
     timestamps: true,
   }
 );

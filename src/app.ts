@@ -2,6 +2,7 @@ import express from 'express';
 import type { Application } from 'express';
 import cors from 'cors';
 import sequelize from './config/database.js';
+import './models/index.js';
 import userRoutes from './routes/userRoutes.js';
 import { logger } from './utils/logger.js';
 

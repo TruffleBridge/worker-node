@@ -2,44 +2,51 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('User', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('UserAddress', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      firstName: {
-        type: Sequelize.STRING(100),
+      userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'User',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
-      lastName: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-      },
-      email: {
+      street1: {
         type: Sequelize.STRING(255),
         allowNull: false,
-        unique: true,
       },
-      phone: {
+      street2: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      zipCode: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
-      password: {
-        type: Sequelize.STRING(255),
+      latitude: {
+        type: Sequelize.DECIMAL(10, 7),
         allowNull: false,
       },
-      activeStatus: {
-        type: Sequelize.BOOLEAN,
+      longitude: {
+        type: Sequelize.DECIMAL(10, 7),
         allowNull: false,
-        defaultValue: true,
-      },
-      deleteStatus: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -54,7 +61,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('User');
-  }
+  async down(queryInterface) {
+    await queryInterface.dropTable('UserAddress');
+  },
 };
