@@ -4,12 +4,12 @@ import type { Request, Response, NextFunction } from 'express';
 
 export const validateRegister = (): ValidationChain[] => {
   return [
-    body('firstname')
+    body('firstName')
       .notEmpty()
       .withMessage('First name is required')
       .isLength({ min: 2 })
       .withMessage('First name must be at least 2 characters'),
-    body('lastname')
+    body('lastName')
       .notEmpty()
       .withMessage('Last name is required')
       .isLength({ min: 2 })
@@ -23,7 +23,7 @@ export const validateRegister = (): ValidationChain[] => {
       .withMessage('Password is required')
       .isLength({ min: 6 })
       .withMessage('Password must be at least 6 characters'),
-    body('phonenumber')
+    body('phoneNumber')
       .notEmpty()
       .withMessage('Phone number is required')
       // .isMobilePhone()
@@ -45,9 +45,11 @@ export const validateLogin = (): ValidationChain[] => {
 
 export const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
-  console.log("errors", errors)
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({
+      status: false,
+      message: 'Validation failed',
+    });
   }
   next();
 };
