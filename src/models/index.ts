@@ -56,7 +56,7 @@ UserType.belongsToMany(User, {
   through: UserRole,
   foreignKey: 'roleId',
   otherKey: 'userId',
-  as: 'users',
+  as: 'roleUsers',
 });
 
 UserRole.belongsTo(User, {
