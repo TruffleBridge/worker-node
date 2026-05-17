@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "ts-node-dev --project tsconfig.tsnode.json --respawn src/server.ts",
+    "dev": "ts-node-dev --project tsconfig.json --respawn src/server.ts",
     "db:migrate": "sequelize-cli db:migrate",
     "db:migrate:undo": "sequelize-cli db:migrate:undo"
   },
