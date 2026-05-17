@@ -2,6 +2,20 @@ import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database.js';
 
 class Role extends Model {
+  static associate(): void {
+    const { User, UserRole } = sequelize.models;
+    if (!User || !UserRole) {
+      return;
+    }
+
+    Role.belongsToMany(User, {
+      through: UserRole,
+      foreignKey: 'roleId',
+      otherKey: 'userId',
+      as: 'users',
+    });
+  }
+
   public id!: number;
   public name!: string;
   public status!: boolean;

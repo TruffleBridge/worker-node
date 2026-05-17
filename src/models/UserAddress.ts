@@ -2,6 +2,18 @@ import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database.js';
 
 class UserAddress extends Model {
+  static associate(): void {
+    const { User } = sequelize.models;
+    if (!User) {
+      return;
+    }
+
+    UserAddress.belongsTo(User, {
+      foreignKey: 'userId',
+      as: 'user',
+    });
+  }
+
   public id!: number;
   public userId!: number;
   public street1!: string;

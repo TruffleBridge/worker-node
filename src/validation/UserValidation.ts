@@ -49,6 +49,22 @@ export const validateLogin = (): ValidationChain[] => {
   ];
 };
 
+export const validateGoogleToken = (): ValidationChain[] => {
+  return [
+    body('idToken')
+      .notEmpty()
+      .withMessage('idToken is required'),
+  ];
+};
+
+export const validateFacebookToken = (): ValidationChain[] => {
+  return [
+    body('accessToken')
+      .notEmpty()
+      .withMessage('accessToken is required'),
+  ];
+};
+
 export const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
